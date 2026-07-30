@@ -1,0 +1,91 @@
+ import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const BookCounterApp());
+}
+
+class BookCounterApp extends StatelessWidget {
+  const BookCounterApp({super.key});
+
+  
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Book Counter',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: Colors.brown,
+        useMaterial3: true,
+      ),
+      home: const BookCounterPage(),
+    );
+  }
+}
+
+class BookCounterPage extends StatefulWidget {
+  const BookCounterPage({super.key});
+
+ 
+  State<BookCounterPage> createState() => _BookCounterPageState();
+}
+
+class _BookCounterPageState extends State<BookCounterPage> {
+  int _count = 0;
+
+  void _increment() {
+    setState(() {
+      _count++;
+    });
+  }
+
+  void _decrement() {
+    setState(() {
+      if (_count > 0) _count--;
+    });
+  }
+
+  
+  Widget build(BuildContext context) {
+   
+    final double emojiSize = 60 + (_count.clamp(0, 30) * 4);
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Book counter')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
+              style: TextStyle(fontSize: emojiSize),
+              child: const Text('📚'),
+            ),
+            const SizedBox(height: 100),
+            Text(
+              '$_count',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  heroTag: 'dec',
+                  onPressed: _decrement,
+                  tooltip: 'Decrease',
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(width: 24),
+                FloatingActionButton(
+                  heroTag: 'inc',
+                  onPressed: _increment,
+                  tooltip: 'Increase',
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
