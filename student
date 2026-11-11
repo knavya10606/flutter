@@ -1,0 +1,76 @@
+ 
+import 'package:flutter/material.dart';
+
+class Student extends StatelessWidget {
+  const Student({super.key});
+
+  Widget card(String title, String value, IconData icon) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue),
+        title: Text(title),
+        subtitle: Text(value),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue.shade50,
+      appBar: AppBar(
+        title: const Text("Student Profile"),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            const CircleAvatar(
+              radius: 55,
+              backgroundImage: NetworkImage(
+                'https://wallpapers.com/images/hd/professional-profile-pictures-1080-x-1080-460wjhrkbwdcp1ig.jpg',
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text("Navya K",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            const Text("B.Tech - Computer Science Engineering"),
+
+            card("Roll Number", "24PA1A05D2", Icons.badge),
+            card("College", "Vishnu Institute of Technology", Icons.school),
+            card("CGPA", "9.43", Icons.grade),
+
+            const SizedBox(height: 12),
+            const Text("My Skills",
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
+            const Wrap(
+              spacing: 8,
+              children: [
+                Chip(label: Text("Flutter")),
+                Chip(label: Text("Python")),
+                Chip(label: Text("Java")),
+                Chip(label: Text("C")),
+                Chip(label: Text("SQL")),
+              ],
+            ),
+
+            const Text("Achievements",
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
+            card("Certification", "FreeCodeCamp", Icons.verified),
+            card("Achievement", "NPTEL Completion", Icons.emoji_events),
+            card("Participation", "Women Who Master Hackathon", Icons.groups),
+
+            const SizedBox(height: 15),
+            const Text("Keep Learning, Keep Growing!",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
